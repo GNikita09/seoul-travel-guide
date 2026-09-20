@@ -65,8 +65,19 @@
   </section>
 
   <section class="section"><div class="notice">小提醒：韩国时间与北京时间在本次旅行期间同为 UTC+8；页面底层仍使用带时区的绝对时间。NAVER Map 按钮需要联网，离线时页面和行程仍可正常查看。</div></section>
+
+  <section class="section" id="finance"><div class="section-title"><h2>旅行财务</h2><span>联网同步 · 只允许管理员编辑</span></div>
+    <article class="card">
+      <div id="financeStatus" class="notice">正在连接共享账本……</div>
+      <div id="financeAuth" style="margin-top:12px;display:none"><div class="small">管理员登录后可以添加、修改和删除账目；其他人只读。</div><div class="actions"><input id="authEmail" type="email" placeholder="管理员邮箱" style="flex:1;min-width:190px;padding:9px;border:1px solid var(--line);border-radius:10px"><input id="authPassword" type="password" placeholder="密码" style="flex:1;min-width:150px;padding:9px;border:1px solid var(--line);border-radius:10px"><button class="btn primary" id="loginBtn">登录</button><button class="btn" id="signupBtn">注册</button></div></div>
+      <div id="financeEditor" style="display:none;margin-top:16px"><details open><summary>添加一笔消费</summary><div class="grid" style="margin-top:12px"><input id="expTitle" placeholder="消费项目，例如：晚餐" style="padding:9px;border:1px solid var(--line);border-radius:10px"><input id="expAmount" type="number" min="0" step="0.01" placeholder="金额（韩元）" style="padding:9px;border:1px solid var(--line);border-radius:10px"><input id="expPayer" placeholder="支付人，例如：我" style="padding:9px;border:1px solid var(--line);border-radius:10px"><input id="expPeople" placeholder="参与人，用逗号分隔：我,A,B" style="padding:9px;border:1px solid var(--line);border-radius:10px"><input id="rateArrival" type="number" min="0" step="0.0001" placeholder="抵达日汇率：1元人民币=？韩元" style="padding:9px;border:1px solid var(--line);border-radius:10px"><input id="expNote" placeholder="备注（可选）" style="padding:9px;border:1px solid var(--line);border-radius:10px"></div><div class="actions"><button class="btn primary" id="addExpenseBtn">保存消费</button><button class="btn" id="logoutBtn">退出登录</button></div></details></div>
+      <div id="financeList" style="margin-top:15px"></div>
+      <div id="financeSummary" style="margin-top:15px"></div>
+    </article>
+  </section>
   <footer class="footer">Seoul, take it slowly.</footer>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   (function(){
     const pad=n=>String(Math.max(0,n)).padStart(2,'0');
@@ -91,6 +102,27 @@
     });
     const hour=Number(new Intl.DateTimeFormat('en-US',{hour:'numeric',hour12:false,timeZone:'Asia/Seoul'}).format(new Date()));
     if(hour<7||hour>=19)document.documentElement.classList.add('night');
+
+    const SB_URL='https://tywvxphkfylxixaolcmh.supabase.co';
+    const SB_KEY='sb_publishable_dPa416mSaicsOuv7q5vzfw_KFAsm-Yg';
+    const ADMIN_EMAIL='2948056108@qq.com';
+    const sb=window.supabase?.createClient(SB_URL,SB_KEY);
+    const $=id=>document.getElementById(id);
+    let expenses=[];
+    function money(n){return Number(n||0).toLocaleString('zh-CN',{maximumFractionDigits:2})+' 韩元'}
+    function setStatus(t,ok=false){$('financeStatus').textContent=t;$('financeStatus').style.background=ok?'#e4eee8':'#fff4df';$('financeStatus').style.color=ok?'#47705b':'#72511e'}
+    function renderFinance(){
+      const editable=!!window.financeUser;
+      $('financeAuth').style.display=editable?'none':'block'; $('financeEditor').style.display=editable?'block':'none';
+      $('financeList').innerHTML=expenses.length?expenses.map(x=>`<div class="event-body" style="margin-top:8px"><h3>${esc(x.title)} <span class="small">${money(x.amount_krw)}</span></h3><p>支付人：${esc(x.payer)} · 参与人：${esc((x.participants||[]).join('、'))}${x.note?' · '+esc(x.note):''}</p>${editable?`<div class="route-row"><button class="btn" data-del="${x.id}">删除</button></div>`:''}</div>`).join(''):'<p class="small">暂时还没有账目。登录后可以添加第一笔消费。</p>';
+      const totals={};expenses.forEach(x=>{const ps=x.participants||[];const each=ps.length?Number(x.amount_krw)/ps.length:0;totals[x.payer]=(totals[x.payer]||0)+Number(x.amount_krw);ps.forEach(p=>{totals[p]=(totals[p]||0)-each})});
+      const rows=Object.entries(totals).filter(([,v])=>Math.abs(v)>0.005).map(([p,v])=>`<div class="price"><span>${esc(p)} ${v>0?'应收':'应付'}</span><span>${money(Math.abs(v))}</span></div>`).join('');
+      $('financeSummary').innerHTML=expenses.length?`<details><summary>当前净结算（韩元）</summary>${rows||'<p class="small">目前已结清。</p>'}<p class="small" style="margin-top:10px">每笔消费默认由参与人平均分摊。最终转账时可按新的汇率换算。</p></details>`:'';
+      document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(!sb)return;await sb.from('expenses').delete().eq('id',b.dataset.del);loadExpenses()});
+    }
+    function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+    async function loadExpenses(){if(!sb){setStatus('财务模块需要联网打开');renderFinance();return}const r=await sb.from('expenses').select('*').order('expense_date',{ascending:true}).order('created_at',{ascending:true});if(r.error){setStatus('账本连接失败，请检查 Supabase 表和网络');return}expenses=r.data||[];setStatus('共享账本已连接 · 朋友可查看，管理员可编辑',true);renderFinance()}
+    if(sb){sb.auth.onAuthStateChange((_e,s)=>{window.financeUser=s?.user;if(window.financeUser?.email?.toLowerCase()!==ADMIN_EMAIL.toLowerCase()){window.financeUser=null;setStatus('当前账号不是管理员，只能查看');}renderFinance()});$('loginBtn').onclick=async()=>{const r=await sb.auth.signInWithPassword({email:$('authEmail').value,password:$('authPassword').value});if(r.error)setStatus('登录失败：'+r.error.message)};$('signupBtn').onclick=async()=>{const r=await sb.auth.signUp({email:$('authEmail').value,password:$('authPassword').value});setStatus(r.error?'注册失败：'+r.error.message:'注册成功，请检查邮箱确认后再登录')};$('logoutBtn').onclick=async()=>{await sb.auth.signOut()};$('addExpenseBtn').onclick=async()=>{const people=$('expPeople').value.split(',').map(x=>x.trim()).filter(Boolean), amount=Number($('expAmount').value);if(!$('expTitle').value||!amount||!$('expPayer').value||!people.length){setStatus('请填写项目、金额、支付人和参与人');return}const r=await sb.from('expenses').insert({title:$('expTitle').value,amount_krw:amount,payer:$('expPayer').value,participants:people,note:$('expNote').value||null});if(r.error)setStatus('保存失败：'+r.error.message);else{['expTitle','expAmount','expPayer','expPeople','expNote'].forEach(id=>$(id).value='');loadExpenses()}};loadExpenses()}
   })();
 </script>
 </body>
