@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f2eb">
+  <title>幸福的闲逛和购物之旅 · 首尔</title>
+  <style>
+    :root{--bg:#f6f2eb;--paper:#fffdf9;--ink:#25231f;--muted:#7e776d;--line:#e8e0d5;--accent:#e66a50;--accent2:#557b69;--night:#18212a;--shadow:0 12px 35px rgba(52,42,30,.08)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}
+    .wrap{max-width:920px;margin:auto;padding:24px 18px 70px}.hero{padding:24px 4px 30px}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.16em;font-weight:800}.hero h1{font-family:Georgia,"Songti SC",serif;font-size:clamp(34px,8vw,66px);line-height:1.04;margin:12px 0 12px;letter-spacing:-.045em}.hero p{margin:0;color:var(--muted);font-size:15px}.pill{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid var(--line);border-radius:99px;background:rgba(255,253,249,.7);font-size:12px;color:var(--muted);margin-top:18px}
+    .section{margin-top:24px}.section-title{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 12px}.section-title h2{font-size:19px;margin:0;letter-spacing:-.02em}.section-title span{font-size:12px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:17px;box-shadow:var(--shadow)}.card h3{font-size:16px;margin:0 0 4px}.sub{font-size:12px;color:var(--muted)}.small{font-size:13px;color:var(--muted)}
+    .flight{position:relative;overflow:hidden}.flight:after{content:"✦";position:absolute;right:17px;top:12px;color:#e8b34d;font-size:25px}.route{display:flex;align-items:center;gap:10px;margin-top:15px}.airport{font-weight:800;font-size:20px}.airport small{display:block;font-size:11px;font-weight:500;color:var(--muted)}.arrow{flex:1;height:1px;background:var(--line);position:relative}.arrow:after{content:"→";position:absolute;right:0;top:-13px;color:var(--accent);font-size:18px}.flight-meta{display:flex;justify-content:space-between;gap:8px;margin-top:13px;font-size:12px;color:var(--muted)}
+    .countdown-card{background:#263c3a;color:#fffdf9;border:0}.countdown-card .sub{color:#c3d0c8}.countdown{display:flex;gap:8px;margin-top:14px}.unit{min-width:55px}.unit b{display:block;font-variant-numeric:tabular-nums;font-size:22px;line-height:1.1}.unit em{font-style:normal;font-size:10px;color:#c3d0c8}.deadline{margin-top:12px;color:#d8e3da;font-size:12px}.done{color:#f4c36d}
+    .notice{padding:13px 15px;border-radius:14px;background:#fff4df;color:#72511e;font-size:13px;border:1px solid #f1dfb8}.place{display:flex;gap:12px;align-items:flex-start}.pin{width:34px;height:34px;border-radius:12px;background:#f6e5dd;color:var(--accent);display:grid;place-items:center;flex:0 0 auto}.place p{margin:2px 0 0;font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.btn{display:inline-flex;text-decoration:none;border-radius:10px;padding:7px 10px;background:#f3eee6;color:var(--ink);font-size:12px;font-weight:700}.btn.primary{background:var(--accent);color:white}.btn.disabled{color:#8f877d;background:#f1ede7}
+    .day{margin-top:22px}.day-head{display:flex;align-items:end;gap:12px;border-bottom:1px solid var(--line);padding:0 2px 10px}.day-number{font-family:Georgia,serif;color:var(--accent);font-size:30px;line-height:1}.day-head h2{margin:0;font-size:21px}.day-head p{margin:2px 0 0;color:var(--muted);font-size:12px}.timeline{position:relative;margin-top:11px}.timeline:before{content:"";position:absolute;left:69px;top:14px;bottom:14px;width:1px;background:var(--line)}.event{display:grid;grid-template-columns:58px 23px 1fr;gap:0 11px;position:relative;padding:10px 0}.time{font-size:13px;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}.time small{display:block;font-size:9px;color:var(--muted);font-weight:500}.dot{width:11px;height:11px;border:3px solid var(--bg);background:var(--accent);border-radius:50%;margin:4px auto;z-index:1}.event-body{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:12px 13px}.event-body h3{font-size:15px;margin:0 0 3px}.event-body p{font-size:13px;margin:0;color:#5d574f}.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:99px;background:#f8e6d9;color:#a74e3b;margin:0 4px 5px 0}.tag.green{background:#e4eee8;color:#47705b}.tag.yellow{background:#fff0c8;color:#80601d}.route-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.route-row .btn{font-size:11px;padding:6px 8px}
+    details{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:12px 14px}summary{cursor:pointer;font-weight:800;font-size:14px}details p{font-size:13px;color:var(--muted);margin:10px 0 0}.price{display:grid;grid-template-columns:1fr auto;gap:5px 14px;margin-top:10px;font-size:13px}.price span:nth-child(even){font-weight:800}.footer{margin-top:36px;text-align:center;color:var(--muted);font-size:11px}.night .hero,.night .section-title h2{color:#f5f0e8}.night body{background:var(--night)}
+    @media(max-width:620px){.grid{grid-template-columns:1fr}.wrap{padding:16px 14px 55px}.hero{padding-top:20px}.timeline:before{left:61px}.timeline{margin-left:-2px}.event{grid-template-columns:50px 23px 1fr}.time{font-size:12px}.unit{min-width:48px}.unit b{font-size:20px}.card{border-radius:17px}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero"><div class="eyebrow">SEOUL · 2026.12.10—12.13</div><h1>幸福的闲逛<br>和购物之旅</h1><p>四个日期，三个完整游玩段落。慢一点，走远一点。</p><div class="pill">北京时间倒计时 · 行程时间以韩国时间为主</div></header>
+
+  <section class="section"><div class="section-title"><h2>机票与旅程</h2><span>时间均含时区</span></div><div class="grid">
+    <article class="card flight"><div class="sub">去程 · 12月10日（上海时间）</div><div class="route"><div class="airport">PVG<small>浦东 T2</small></div><div class="arrow"></div><div class="airport">ICN<small>仁川 T1</small></div></div><div class="flight-meta"><span>春秋航空 9C8559</span><span>13:50 → 16:40</span></div></article>
+    <article class="card flight"><div class="sub">回程 · 12月13日（韩国时间）</div><div class="route"><div class="airport">ICN<small>仁川 T1</small></div><div class="arrow"></div><div class="airport">PVG<small>浦东 T2</small></div></div><div class="flight-meta"><span>春秋航空 9C8560</span><span>17:40 → 19:00</span></div></article>
+  </div></section>
+
+  <section class="section"><div class="grid">
+    <article class="card countdown-card"><div class="sub">距离出发</div><div class="countdown" data-target="2026-12-10T13:50:00+08:00"><div class="unit"><b data-d>--</b><em>天</em></div><div class="unit"><b data-h>--</b><em>时</em></div><div class="unit"><b data-m>--</b><em>分</em></div><div class="unit"><b data-s>--</b><em>秒</em></div></div><div class="deadline">2026.12.10 13:50 · Asia/Shanghai</div></article>
+    <article class="card countdown-card"><div class="sub">距离回程</div><div class="countdown" data-target="2026-12-13T17:40:00+08:00"><div class="unit"><b data-d>--</b><em>天</em></div><div class="unit"><b data-h>--</b><em>时</em></div><div class="unit"><b data-m>--</b><em>分</em></div><div class="unit"><b data-s>--</b><em>秒</em></div></div><div class="deadline">2026.12.13 17:40 · Asia/Seoul</div></article>
+  </div></section>
+
+  <section class="section"><div class="section-title"><h2>提前预约</h2><span>北京时间</span></div><article class="card"><div class="place"><div class="pin">✂</div><div><h3>Tan Studio · 탄(TAN)헤어스튜디오 연남점</h3><div class="sub">12月11日 10:00 · 需要预约</div><p class="small">建议预约提醒：出发前两周 · 2026年11月26日 00:00（Asia/Shanghai）</p></div></div><div class="countdown" data-target="2026-11-26T00:00:00+08:00" style="color:var(--ink)"><div class="unit"><b data-d>--</b><em>天</em></div><div class="unit"><b data-h>--</b><em>时</em></div><div class="unit"><b data-m>--</b><em>分</em></div><div class="unit"><b data-s>--</b><em>秒</em></div></div><div class="actions"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%ED%83%84%28TAN%29%ED%97%A4%EC%96%B4%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4+%EC%97%B0%EB%82%A8%EC%A0%90" target="_blank" rel="noopener">打开 Google Maps</a></div></article></section>
+
+  <section class="section"><div class="section-title"><h2>每日行程</h2><span>韩国时间 · Asia/Seoul</span></div>
+    <article class="day"><div class="day-head"><div class="day-number">01</div><div><h2>抵达首尔 · 弘大夜逛</h2><p>12月10日，周四</p></div></div><div class="timeline">
+      <div class="event"><div class="time">16:40<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>抵达仁川机场 T1</h3><p>入境、取行李后乘机场大巴6002前往弘大。预计19:00左右抵达酒店。</p></div></div>
+      <div class="event"><div class="time">19:00<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>入住阿曼缇酒店</h3><p>Amanti Hotel Seoul · 31 World Cup buk-ro。先办理入住、放行李并稍作休息。</p><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Amanti+Hotel+Seoul+31+World+Cup+buk-ro" target="_blank" rel="noopener">酒店地图</a></div></div></div>
+      <div class="event"><div class="time">19:30<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>한사발포차 홍대점 晚餐</h3><p>서울 마포구 와우산로 76 1층 · 营业至次日凌晨4:00最后点单。</p><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%ED%95%9C%EC%82%AC%EB%B0%9C%ED%8F%AC%EC%B0%A8+%ED%99%8D%EB%8C%80%EC%A0%90+%EC%84%9C%EC%9A%B8+%EB%A7%88%ED%8F%AC%EA%B5%AC+%EC%99%80%EC%9A%B0%EC%82%B0%EB%A1%9C+76" target="_blank" rel="noopener">酒店 → 餐厅</a></div></div></div>
+      <div class="event"><div class="time">饭后<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><span class="tag green">现场选择</span><h3>弘大夜逛</h3><p>Red Road、街头表演、Olive Young / OY 养生健康店。此处不预设具体导航。</p></div></div>
+    </div></article>
+
+    <article class="day"><div class="day-head"><div class="day-number">02</div><div><h2>理发染发 · 蚕室购物</h2><p>12月11日，周五</p></div></div><div class="timeline">
+      <div class="event"><div class="time">09:00<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>보승회관 홍대直营店 早餐</h3><p>서울 마포구 어울마당로 131 · 24小时营业。弘大入口站8号出口步行约173米。</p><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%EB%B3%B4%EC%8A%B9%ED%9A%8C%EA%B4%80+%ED%99%8D%EB%8C%80%EC%A7%81%EC%98%81%EC%A0%90+%EC%84%9C%EC%9A%B8+%EB%A7%88%ED%8F%AC%EA%B5%AC+%EC%96%B4%EC%9A%B8%EB%A7%88%EB%8B%B9%EB%A1%9C+131" target="_blank" rel="noopener">酒店 → 早餐</a></div></div></div>
+      <div class="event"><div class="time">10:00<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><span class="tag">需要预约</span><h3>Tan Studio 理发、染发</h3><p>탄(TAN)헤어스튜디오 연남점 · 10:00—19:00。地址：Yeonnamdong / Donggyo-ro 41-gil，3 리안빌딩 4층。</p><details><summary>查看价格参考</summary><div class="price"><span>剪发</span><span>44,000韩元</span><span>整体染色</span><span>150,000韩元</span><span>女士烫发</span><span>250,000韩元</span><span>男士烫发</span><span>160,000韩元</span><span>魔术直筒</span><span>180,000韩元</span><span>根部魔术</span><span>140,000韩元</span></div><p>肩下、胸下分别加收20,000韩元；价格以店内最终确认及具体手艺为准。</p></details><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%ED%83%84%28TAN%29%ED%97%A4%EC%96%B4%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4+%EC%97%B0%EB%82%A8%EC%A0%90" target="_blank" rel="noopener">早餐 → 理发店</a></div></div></div>
+      <div class="event"><div class="time">之后<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>前往蚕室乐天百货</h3><p>理发染发结束后出发，不设死时间。午餐安排在抵达乐天后店内解决。</p><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&origin=%ED%83%84%28TAN%29%ED%97%A4%EC%96%B4%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4+%EC%97%B0%EB%82%A8%EC%A0%90&destination=%EB%A1%AF%EB%8D%B0%EB%B0%B1%ED%99%94%EC%A0%90+%EC%9E%A0%EC%8B%A4%EC%A0%90+%EC%84%9C%EC%9A%B8+%EC%86%A1%ED%8C%8C%EA%B5%AC+%EC%98%AC%EB%A6%BC%ED%94%BD%EB%A1%9C+240" target="_blank" rel="noopener">理发店 → 乐天</a></div></div></div>
+      <div class="event"><div class="time">抵达后<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>乐天百货蚕室店 · 午餐 + 购物</h3><p>롯데백화점 잠실점 · 韩国首尔松坡区 Olympic-ro 240 · 营业时间约10:30—20:30。午餐在百货店内现场选择。</p><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=%EB%A1%AF%EB%8D%B0%EB%B0%B1%ED%99%94%EC%A0%90+%EC%9E%A0%EC%8B%A4%EC%A0%90+%EC%84%9C%EC%9A%B8+%EC%86%A1%ED%8C%8C%EA%B5%AC+%EC%98%AC%EB%A6%BC%ED%94%BD%EB%A1%9C+240" target="_blank" rel="noopener">打开乐天地图</a></div></div></div>
+      <div class="event"><div class="time">晚间<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><span class="tag yellow">待定</span><h3>晚餐：弘大烤肉 / 蚕室附近烤肉</h3><p>根据理发结束时间、购物进度和体力决定。清溪川为可选夜间活动。</p></div></div>
+    </div></article>
+
+    <article class="day"><div class="day-head"><div class="day-number">03</div><div><h2>汉南洞 · 圣水洞</h2><p>12月12日，周六</p></div></div><div class="timeline">
+      <div class="event"><div class="time">上午<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>酒店附近早餐 / 便利店</h3><p>现场选择。明洞免税店视12月11日乐天购物是否满意再决定。</p><div class="route-row"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Myeongdong+Seoul" target="_blank" rel="noopener">明洞区域地图</a></div></div></div>
+      <div class="event"><div class="time">中午<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>汉南洞 · 午餐与闲逛</h3><p>午餐现场选择。区域级导航，不预设具体店铺。</p><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Hannam-dong+Seoul" target="_blank" rel="noopener">汉南洞区域地图</a></div></div></div>
+      <div class="event"><div class="time">下午<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>汉南洞 → 圣水洞</h3><p>继续逛街；Hetras护手霜、药妆博物馆等地点现场选择。</p><div class="route-row"><a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=Seongsu-dong+Seoul" target="_blank" rel="noopener">圣水洞区域地图</a></div></div></div>
+      <div class="event"><div class="time">晚上<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>圣水洞晚餐</h3><p>现场选择。晚饭后汉江公园和酒吧作为可选活动。</p><div class="route-row"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Seoul+Hangang+Park" target="_blank" rel="noopener">汉江公园区域地图</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Hongdae+Seoul" target="_blank" rel="noopener">弘大区域地图</a></div></div></div>
+    </div></article>
+
+    <article class="day"><div class="day-head"><div class="day-number">04</div><div><h2>退房 · 返回上海</h2><p>12月13日，周日</p></div></div><div class="timeline">
+      <div class="event"><div class="time">12:00前<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>酒店退房</h3><p>退房后先吃午饭。</p></div></div>
+      <div class="event"><div class="time">13:30<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><span class="tag yellow">重要提醒</span><h3>午饭后立即前往机场</h3><p>预留退税、机场提货、值机和安检时间。不建议再增加市区购物或临时停留。</p></div></div>
+      <div class="event"><div class="time">17:40<small>韩国时间</small></div><div class="dot"></div><div class="event-body"><h3>仁川机场 T1 起飞</h3><p>春秋航空 9C8560，19:00抵达上海浦东机场 T2（上海时间）。</p></div></div>
+    </div></article>
+  </section>
+
+  <section class="section"><div class="notice">小提醒：韩国时间与北京时间在本次旅行期间同为 UTC+8；页面底层仍使用带时区的绝对时间。NAVER Map 按钮需要联网，离线时页面和行程仍可正常查看。</div></section>
+  <footer class="footer">Seoul, take it slowly.</footer>
+</main>
+<script>
+  (function(){
+    const pad=n=>String(Math.max(0,n)).padStart(2,'0');
+    function tick(){document.querySelectorAll('[data-target]').forEach(box=>{const diff=new Date(box.dataset.target).getTime()-Date.now();const sec=Math.max(0,Math.floor(diff/1000));const vals=[Math.floor(sec/86400),Math.floor(sec%86400/3600),Math.floor(sec%3600/60),sec%60];['d','h','m','s'].forEach((k,i)=>{const el=box.querySelector('[data-'+k+']');if(el)el.textContent=pad(vals[i])});if(diff<=0)box.classList.add('done')})}
+    tick();setInterval(tick,1000);
+    const naverTerms={
+      'Amanti Hotel Seoul 31 World Cup buk-ro':'아만티 호텔 서울',
+      'Myeongdong Seoul':'서울 명동',
+      'Hannam-dong Seoul':'서울 한남동',
+      'Seongsu-dong Seoul':'서울 성수동',
+      'Seoul Hangang Park':'서울 한강공원',
+      'Hongdae Seoul':'서울 홍대입구역'
+    };
+    document.querySelectorAll('a[href*="google.com/maps"]').forEach(a=>{
+      const u=new URL(a.href), query=u.searchParams.get('query');
+      if(query){const term=naverTerms[query]||query;a.href='https://map.naver.com/p/search/'+encodeURIComponent(term.replace(/\\+/g,' '));}
+      else if(u.pathname.includes('/dir/')){
+        const destination=u.searchParams.get('destination')||'';
+        a.href='https://map.naver.com/p/search/'+encodeURIComponent(destination.replace(/\\+/g,' '));
+      }
+      a.textContent=a.textContent.replace(/Google Maps|NAVER Map|百度地图/g,'NAVER Map');
+    });
+    const hour=Number(new Intl.DateTimeFormat('en-US',{hour:'numeric',hour12:false,timeZone:'Asia/Seoul'}).format(new Date()));
+    if(hour<7||hour>=19)document.documentElement.classList.add('night');
+  })();
+</script>
+</body>
+</html>
